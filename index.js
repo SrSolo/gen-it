@@ -1,4 +1,3 @@
-
 document.getElementById('imageForm').addEventListener('submit', async function (e) {
     e.preventDefault();
     const form = e.target;
@@ -6,10 +5,12 @@ document.getElementById('imageForm').addEventListener('submit', async function (
   
     const apiKey = formData.get('apiKey');
     const textPrompt = formData.get('textPrompt');
+    const imageSize = formData.get('imageSize'); // Get selected image size
   
     const requestData = {
       apiKey,
-      textPrompt
+      textPrompt,
+      imageSize // Include image size in the request data
     };
   
     try {
@@ -26,25 +27,37 @@ document.getElementById('imageForm').addEventListener('submit', async function (
       }
   
       const responseData = await response.json();
-      console.log('OpenAI API Response:', responseData);
   
-      // Extract the image URL from the response data
+      // Check if the data property is present in the response
+      if (!responseData.data) {
+        throw new Error('Data property not found in the response');
+      }
+  
+      // Display the full response data
+      const outputContainer = document.getElementById('output');
+      outputContainer.innerHTML = `<pre>${JSON.stringify(responseData, null, 2)}</pre>`;
+  
+      // Check if the imageURL is present in the response data
       const imageURL = responseData.data[0]?.url;
   
-      // Create an <img> element and set its src attribute to the imageURL
+      if (!imageURL) {
+        throw new Error('Generated image URL not found in the response');
+      }
+  
+      // Display the generated image
       const imgElement = document.createElement('img');
       imgElement.src = imageURL;
       imgElement.alt = 'Generated Image';
   
-      // Display the image on the frontend
       const imageContainer = document.getElementById('imageContainer');
       imageContainer.innerHTML = ''; // Clear previous image, if any
       imageContainer.appendChild(imgElement);
-  
     } catch (error) {
       console.error('Error:', error);
       const outputContainer = document.getElementById('output');
       outputContainer.innerHTML = 'An error occurred while generating the image.';
+      const imageContainer = document.getElementById('imageContainer');
+      imageContainer.innerHTML = ''; // Clear previous image, if any
     }
   });
   
