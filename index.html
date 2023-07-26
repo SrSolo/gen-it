@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Generation App</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>
+    <h1>Image Generation App</h1>
+    <div class="form-container">
+        <form id="imageForm">
+            <label for="apiKey">Enter your OpenAI API key:</label>
+            <input type="text" id="apiKey" name="apiKey" required>
+            <br>
+            <label for="textPrompt">Enter a text prompt:</label>
+            <input type="text" id="textPrompt" name="textPrompt" required>
+            <br>
+            <input type="submit" value="Generate Image">
+        </form>
+    </div>
+    <div id="output" class="output-container"></div>
+    <div id="imageContainer"></div> 
+    <script src="index.js"></script>
+</body>
+</html>
