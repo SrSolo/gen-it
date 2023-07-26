@@ -34,8 +34,8 @@ document.getElementById('imageForm').addEventListener('submit', async function (
       }
   
       // Display the full response data
-      const outputContainer = document.getElementById('output');
-      outputContainer.innerHTML = `<pre>${JSON.stringify(responseData, null, 2)}</pre>`;
+    //   const outputContainer = document.getElementById('output');
+    //   outputContainer.innerHTML = `<pre>${JSON.stringify(responseData, null, 2)}</pre>`;
   
       // Check if the imageURL is present in the response data
       const imageURL = responseData.data[0]?.url;

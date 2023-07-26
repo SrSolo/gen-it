@@ -7,15 +7,16 @@ app.use(bodyParser.json());
 
 app.post('/api/generate_image', async (req, res) => {
   try {
-    const { apiKey, textPrompt } = req.body;
+    const { apiKey, textPrompt, imageSize } = req.body;
 
-    if (!apiKey || !textPrompt) {
+    if (!apiKey || !textPrompt || !imageSize) {
       res.status(400).json({ error: 'Please provide both the API key and the text prompt.' });
       return;
     }
 
     console.log('Received API Key:', apiKey);
     console.log('Received Text Prompt:', textPrompt);
+    console.log('Received Image Size:', imageSize);
 
     const configuration = new Configuration({
       apiKey: apiKey,
@@ -26,7 +27,7 @@ app.post('/api/generate_image', async (req, res) => {
     const response = await openai.createImage({
       prompt: textPrompt,
       n: 1,
-      size: "1024x1024",
+      size: imageSize,
     });
 
     console.log('OpenAI API Response:', response.data);
