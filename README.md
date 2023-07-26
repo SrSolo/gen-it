@@ -1,4 +1,6 @@
 # gen-it
+https://gen-it-srsolo.vercel.app/
+
 Using your OpenAI token to generate images. 
 
 Added image size dropdown. 
